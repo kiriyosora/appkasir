@@ -72,9 +72,9 @@
                                                 <input type="text" name="namapelanggan" value="<?= $kolom['NamaPelanggan']; ?>" class="form-control" required>
                                                 <br>
                                                 <label for="Alamat">Alamat</label>
-                                                <textarea name="alamat" cols="60" rows="5" class="form-control"><?= $kolom['Alamat']; ?></textarea>
+                                                <textarea name="alamat" cols="60" rows="4" class="form-control"><?= $kolom['Alamat']; ?></textarea>
                                                 <br>
-                                                <label for="NomorTelepon">NomorTelepon</label>
+                                                <label for="NomorTelepon">Nomor Telepon</label>
                                                 <input type="text" name="nomortelepon" value="<?= $kolom['NomorTelepon']; ?>" class="form-control" required>
                                                 <br>
                                                 <button type="submit" class="btn btn-block bg-blue"> <i class="fas fa-save"></i> Simpan </button>
@@ -120,9 +120,9 @@
                     <input type="text" name="namapelanggan" class="form-control" required>
                     <br>
                     <label for="Alamat">Alamat</label>
-                    <textarea name="alamat" cols="60" rows="5"></textarea>
+                    <textarea name="alamat" cols="60" rows="4"></textarea>
                     <br>
-                    <label for="NomorTelepon">NomorTelepon</label>
+                    <label for="NomorTelepon">Nomor Telepon</label>
                     <input type="text" name="nomortelepon" class="form-control" required>
                     <br>
                     <button type="submit" class="btn btn-block bg-blue"> <i class="fas fa-save"></i> Simpan </button>

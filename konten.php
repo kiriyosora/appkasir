@@ -16,6 +16,22 @@ else if($_GET['p']=='user'){
     $title = "Data User";
     $konten = "konten/user.php";
 }
+else if($_GET['p']=='tambah'){
+    $title = "Tambah Penjualan Baru";
+    $konten = "konten/tambah.php";
+}
+else if($_GET['p']=='laporan'){
+    $title = "Laporan Sistem";
+    $konten = "konten/laporan.php";
+}
+else if($_GET['p']=='backup'){
+    $title = "Backup Sistem";
+    $konten = "konten/backup.php";
+}
+else if($_GET['p']=='restore'){
+    $title = "Restore Sistem";
+    $konten = "konten/restore.php";
+}
 else{
     $title = "Halaman tidak ditemukan";
     $konten = "konten/404.php";
