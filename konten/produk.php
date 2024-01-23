@@ -52,7 +52,7 @@
                                     <!-- Tombol Edit -->
                                     <a href="#" data-toggle="modal" data-target="#modalUbah<?= $kolom['ProdukID']; ?>"><i class="fas fa-edit"></i></a>&nbsp; | &nbsp;
                                     <!-- Tombol Hapus -->
-                                    <a onclick="return confirm('Yakin mau hapus data wir?')" href="aksi/produk.php?aksi=hapus&produkID=<?= $kolom['ProdukID']; ?>"><i class="fas fa-trash"></a></i>
+                                    <a onclick="return confirm('Yakin mau hapus data?')" href="aksi/produk.php?aksi=hapus&produkID=<?= $kolom['ProdukID']; ?>"><i class="fas fa-trash"></a></i>
                                 </td>
                             </tr>
                             <!-- Modal Ubah user -->

@@ -1,4 +1,27 @@
 <?php
+// menghitung produk
+$sql1="SELECT COUNT(ProdukID) AS total_produk FROM produk";
+$query1=mysqli_query($koneksi,$sql1);
+$produk=mysqli_fetch_array($query1);
+$jumlah_produk=$produk['total_produk'];
+
+// menghitung jumlah transaksi
+  $sql2="SELECT COUNT(PenjualanID) AS jumlah_transaksi FROM penjualan";
+  $query2=mysqli_query($koneksi,$sql2);
+  $transaksi=mysqli_fetch_array($query2);
+  $jumlah_transaksi=$transaksi['jumlah_transaksi'];
+
+  // menghitung total transaksi
+  $sql3="SELECT SUM(TotalHarga) AS total_transaksi FROm penjualan";
+  $query3=mysqli_query($koneksi,$sql3);
+  $tt=mysqli_fetch_array($query3);
+  $total_transaksi=$tt['total_transaksi'];
+
+  // menghitung total pelanggan
+  $sql4="SELECT COUNT(PelangganID) AS total_pelanggan FROM penjualan";
+  $query4=mysqli_query($koneksi,$sql4);
+  $pelanggan=mysqli_fetch_array($query4);
+  $total_pelanggan=$pelanggan['total_pelanggan'];
 
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -30,7 +53,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3></h3>
+              <h3><?= $jumlah_produk?></h3>
 
               <p>Produk</p>
             </div>
@@ -45,7 +68,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3></h3>
+              <h3><?= $jumlah_transaksi?></h3>
 
               <p>Jumlah Transaksi</p>
             </div>
@@ -60,7 +83,7 @@
           <!-- small box -->
           <div class="small-box bg-purple">
             <div class="inner">
-              <h3>Rp. </h3>
+              <h3>Rp. <?= number_format($total_transaksi) ?></h3>
 
               <p>Total Transaksi</p>
             </div>
@@ -75,9 +98,9 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>Rp. </h3>
+              <h3><?= $total_pelanggan ?></h3>
 
-              <p>Total Keuntungan</p>
+              <p>Total Pelanggan</p>
             </div>
             <div class="icon">
               <i class="fas fa-exclamation-triangle"></i>

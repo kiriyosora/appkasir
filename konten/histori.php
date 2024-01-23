@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Data Pelanggan</h1>
+                    <h1 class="m-0">Histori Penjualan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Data Utama</a></li>
-                        <li class="breadcrumb-item active">Pelanggan</li>
+                        <li class="breadcrumb-item"><a href="#">Penjualan</a></li>
+                        <li class="breadcrumb-item active">Histori Penjualan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,38 +23,42 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h5>Data Pelanggan</h5>
+                    <h5>Data Penjualan</h5>
                 </div>
                 <div class="card-body">
 
                     <table id="example1" class="table table-hover">
                         <thead class="bg-dark">
-                            <th>Pelanggan ID</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Alamat</th>
-                            <th>Nomor Telepon</th>
+                            <th>ID</th>
+                            <th>Tanggal Penjualan</th>
+                            <th>Pelanggan</th>
+                            <th>Total Belanja</th>
                             <th>Aksi</th>
                         </thead>
                         <?php
-                        $sql = "SELECT * FROM pelanggan";
+                        $sql = "SELECT penjualan.*,pelanggan.NamaPelanggan FROM penjualan,pelanggan WHERE penjualan.PelangganID=pelanggan.PelangganID";
                         $query = mysqli_query($koneksi, $sql);
                         while ($kolom = mysqli_fetch_array($query)) {
                         ?>
 
                             <tr>
-                                <td><?= $kolom['PelangganID']; ?></td>
+                                <td><?= $kolom['PenjualanID']; ?></td>
+                                <td><?= $kolom['TanggalPenjualan']; ?></td>
                                 <td><?= $kolom['NamaPelanggan']; ?></td>
-                                <td><?= $kolom['Alamat']; ?></td>
-                                <td><?= $kolom['NomorTelepon']; ?></td>
+                                <td><?=number_format($kolom['TotalHarga']) ; ?></td>
                                 <td>
-                                    <!-- Tombol Edit -->
-                                    <a href="#" data-toggle="modal" data-target="#modalUbah<?= $kolom['PelangganID']; ?>"><i class="fas fa-edit"></i></a>&nbsp; | &nbsp;
+                                    <!-- Tombol Print Nota -->
+                                    <a href="#"><i class="fas fa-print"></i></a>
+                                    &nbsp;| &nbsp;
+                                    <!-- Tombol Informasi -->
+                                    <a href="index.php?p=infojual&PenjualanID=<?= $kolom['PenjualanID']; ?>"><i class="fas fa-search"></i></a>
+                                    &nbsp;| &nbsp;
                                     <!-- Tombol Hapus -->
-                                    <a onclick="return confirm('Yakin mau hapus data?')" href="aksi/pelanggan.php?aksi=hapus&pelangganID=<?= $kolom['PelangganID']; ?>"><i class="fas fa-trash"></a></i>
+                                    <a href="aksi/penjualan.php?aksi=hapus&PenjualanID=<?= $kolom['PenjualanID']; ?>" onclick="return confirm('Yakin ingin hapus data ini?')"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
-                            <!-- Modal Ubah user -->
-                            <div class="modal fade" id="modalUbah<?= $kolom['PelangganID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- Modal Ubah produk -->
+                            <div class="modal fade" id="modalUbah<?= $kolom['ProdukID']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -64,18 +68,20 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="aksi/pelanggan.php" method="post">
+                                            <form action="aksi/produk.php" method="post">
                                                 <input type="hidden" name="aksi" value="ubah">
-                                                <input type="hidden" name="pelangganID" value="<?= $kolom['PelangganID']; ?>">
-
-                                                <label for="NamaPelanggan">Nama Pelanggan</label>
-                                                <input type="text" name="namapelanggan" value="<?= $kolom['NamaPelanggan']; ?>" class="form-control" required>
+                                                <input type="hidden" name="produkID" value="<?= $kolom['ProdukID']; ?>">
+                                                <label for="Barcode">Barcode</label>
+                                                <input type="text" name="barcode" value="<?= $kolom['Barcode']; ?>" class="form-control" required>
                                                 <br>
-                                                <label for="Alamat">Alamat</label>
-                                                <textarea name="alamat" cols="60" rows="4" class="form-control"><?= $kolom['Alamat']; ?></textarea>
+                                                <label for="NamaProduk">Nama Produk</label>
+                                                <input type="text" name="namaproduk" value="<?= $kolom['NamaProduk']; ?>" class="form-control" required>
                                                 <br>
-                                                <label for="NomorTelepon">Nomor Telepon</label>
-                                                <input type="text" name="nomortelepon" value="<?= $kolom['NomorTelepon']; ?>" class="form-control" required>
+                                                <label for="Harga">Harga</label>
+                                                <input type="text" name="harga" value="<?=number_format($kolom['Harga']) ; ?>" class="form-control" required>
+                                                <br>
+                                                <label for="Stok">Stok</label>
+                                                <input type="number" name="stok" value="<?= $kolom['Stok']; ?>" class="form-control" required>
                                                 <br>
                                                 <button type="submit" class="btn btn-block bg-blue"> <i class="fas fa-save"></i> Simpan </button>
                                             </form>
@@ -91,7 +97,7 @@
                         ?>
                     </table>
 
-                    <button type="button" class="btn bg-dark btn-block mt-3" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Pelanggan Baru</button>
+                    <button type="button" class="btn bg-dark btn-block mt-3" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Produk Baru</button>
 
                 </div>
             </div>
@@ -107,23 +113,26 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Pelanggan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="aksi/pelanggan.php" method="post">
+                <form action="aksi/produk.php" method="post">
                     <input type="hidden" name="aksi" value="tambah">
 
-                    <label for="NamaPelanggan">Nama Pelanggan</label>
-                    <input type="text" name="namapelanggan" class="form-control" required>
+                    <label for="Barcode">Barcode</label>
+                    <input type="text" name="barcode" class="form-control" required>
                     <br>
-                    <label for="Alamat">Alamat</label>
-                    <textarea name="alamat" cols="60" rows="4"></textarea>
+                    <label for="NamaProduk">Nama Produk</label>
+                    <input type="text" name="namaproduk" class="form-control" required>
                     <br>
-                    <label for="NomorTelepon">Nomor Telepon</label>
-                    <input type="text" name="nomortelepon" class="form-control" required>
+                    <label for="Harga">Harga</label>
+                    <input type="number" name="harga" class="form-control" required>
+                    <br>
+                    <label for="Stok">Stok</label>
+                    <input type="number" name="stok" class="form-control" required>
                     <br>
                     <button type="submit" class="btn btn-block bg-blue"> <i class="fas fa-save"></i> Simpan </button>
                 </form>
