@@ -69,7 +69,7 @@ define ('K_PATH_IMAGES', dirname(__FILE__).'/../images/');
  * Deafult image logo used be the default Header() method.
  * Please set here your own logo or an empty string to disable it.
  */
-define ('PDF_HEADER_LOGO', 'logo_smk.png');
+define ('PDF_HEADER_LOGO', 'logo_smk.jpg');
 
 /**
  * Header logo image width in user units.
@@ -114,7 +114,7 @@ define ('PDF_HEADER_TITLE', 'TCPDF Example');
 /**
  * Header description string.
  */
-define ('PDF_HEADER_STRING', "SMK Pariwisata Triatma Jaya Badung - Tecnick.com\nJl. Kubu Gunung Tegal jaya Kuta Utara - Telp: 0361-412971 \nEmail: info@smktj-bdg.sch.id - Website:https://smktj-bdg.sch.id");
+define ('PDF_HEADER_STRING', "by SMK Pariwisata Triatma Jaya Badung\nJl. Kubu Gunung Tegal Jaya Kuta Utara - Telp: 0361-412971 \nEmail:info@smktj-bdg.sch.id Website:https://smktj-bdg.sch.id");
 
 /**
  * Document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch].

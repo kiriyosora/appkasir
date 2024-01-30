@@ -3,31 +3,30 @@ session_start();
 include "../koneksi.php";
 include "../function.php";
 
-if ($_POST) {
-    if ($_POST['aksi'] == 'tambah') {
-        $nama = $_POST['nama'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $hak_akses = $_POST['hak_akses'];
+if($_POST){
+    if($_POST['aksi']=='tambah'){
+        $nama=$_POST['nama'];
+        $username=$_POST['username'];
+        $password=$_POST['password'];
+        $hak_akses=$_POST['hak_akses'];
 
-        $sql = "INSERT INTO user (id_user,nama,username,password,hak_akses) VALUES(DEFAULT,'$nama','$username','$password','$hak_akses')";
-        // echo $sql; //cek perintah
-        mysqli_query($koneksi, $sql);
-        notifikasi($koneksi);
+        $sql="INSERT INTO user (id_user,nama,username,password,hak_akses) VALUES(DEFAULT,'$nama','$username','$password','$hak_akses')";
 
-        header('location:../index.php?p=user');
-    } else if ($_POST['aksi'] == 'ubah') {
-        $id_user = $_POST['id_user'];
-        $nama = $_POST['nama'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $hak_akses = $_POST['hak_akses'];
-
-        $sql = "UPDATE user SET nama='$nama', username='$username', password='$password', hak_akses='$hak_akses' WHERE id_user=$id_user";
-        // echo $sql; //cek perintah
         mysqli_query($koneksi,$sql);
         notifikasi($koneksi);
+        header('location:../index.php?p=user');
+    }
+    else if($_POST['aksi']=='ubah'){
+        $id_user=$_POST['id_user'];
+        $nama=$_POST['nama'];
+        $username=$_POST['username'];
+        $password=$_POST['password'];
+        $hak_akses=$_POST['hak_akses'];
 
+        $sql="UPDATE user SET nama='$nama', username='$username', password='$password', hak_akses='$hak_akses' WHERE id_user=$id_user";
+
+        mysqli_query($koneksi,$sql);
+        notifikasi($koneksi);
         header('location:../index.php?p=user');
     }
     else if($_POST['aksi']=='login'){
@@ -44,9 +43,9 @@ if ($_POST) {
             $_SESSION['id']=$user['id_user'];
             $_SESSION['akses']=$user['hak_akses'];
             if ($user['hak_akses']==1){
-                $_SESSION['menu']="Administrator";
+              $_SESSION['menu']="Administrator";
             } else {
-                $_SESSION['menu']="Petugas";
+              $_SESSION['menu']="Petugas";
             }
             $_SESSION['status_proses']='';
 
@@ -57,13 +56,16 @@ if ($_POST) {
     }
 }
 
-if ($_GET) {
-    if ($_GET['aksi'] == 'hapus') {
-        $id_user = $_GET['id_user'];
-        $sql = "DELETE FROM user WHERE id_user=$id_user";
+if($_GET){
 
-        mysqli_query($koneksi, $sql);
+     if ($_GET['aksi']=='hapus'){
+        $id_user=$_GET['id_user'];
+        $sql="DELETE FROM user WHERE id_user=$id_user"; // Hard Delete
+        mysqli_query($koneksi,$sql);
         notifikasi($koneksi);
         header('location:../index.php?p=user');
     }
+
 }
+
+?>

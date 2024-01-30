@@ -1,8 +1,9 @@
-<?php 
-// Memulai Session
+<?php
+// Memulai SESSION
 session_start();
 
-// Menghapus Session
+// menghapus SESSION
 session_destroy();
 
 header("location:../login.php");
+?>
